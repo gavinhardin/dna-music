@@ -81,14 +81,15 @@ class DNAMusic:
                 if amino_acid in self.classes["Non-Polar"]:
                     port_num = 1
                 elif amino_acid in self.classes["Polar"]:
-                    port_num = 2
+                    # Ports 2 and 3 combined due to technical limitations in VCV Rack
+                    port_num = 1
                 elif amino_acid in self.classes["Basic"]:
                     port_num = 3
                 elif amino_acid in self.classes["Acidic"]:
                     port_num = 4
 
                 # Map acid to note
-                self.play_note(self.acids[triplet], port_num)
+                self.play_note(self.acids[amino_acid], port_num)
 
     def finish(self):
         for port in self.ports:
