@@ -38,13 +38,9 @@ class DNAMusic:
                "Basic": {"His", "Lys", "Arg"},
                "Acidic": {"Asp", "Glu"}}
 
-    def __init__(self):
+    def __init__(self, ports):
         """Open ports used to send MIDI signals."""
-        self.ports = [mido.open_output('IAC Driver Bus 1'),
-                      mido.open_output('IAC Driver IAC Bus 2'),
-                      mido.open_output('IAC Driver IAC Bus 3'),
-                      mido.open_output('IAC Driver IAC Bus 4'),
-                      mido.open_output('IAC Driver IAC Bus 5')]
+        self.ports = [mido.open_output(port) for port in ports]
 
     def play_note(self, note, port_num):
         """Play a single MIDI note, given the note to play and port to send it to."""
@@ -110,6 +106,8 @@ if __name__ == "__main__":
                          "tctagtagca gttctactca cattaacatg gatcggagga caaccagtcg aacaccctta cattattatc " \
                          "ggtcaaatag catccatcct atatttccta attattctaa tcctaatacc aattactagt ttaatagaaa " \
                          "actaccttct aaaatgaaga"
-    music = DNAMusic()
+    ports = ['IAC Driver Bus 1', 'IAC Driver IAC Bus 2', 'IAC Driver IAC Bus 3', 'IAC Driver IAC Bus 4', 
+             'IAC Driver IAC Bus 5']
+    music = DNAMusic(ports)
     music.play_code(honduran_white_bat_cytb)
     music.finish()
